@@ -50,7 +50,7 @@ def calculate_alpha_beta(asset_returns: np.ndarray, market_returns: np.ndarray, 
     return alpha, beta
 
 def plot_efficient_frontier(results: np.ndarray, output_path: Path):
- """Plot efficient frontier """
+    """Plot efficient frontier """
     fig, ax = plt.subplots(figsize=(10, 4))
     scatter = ax.scatter(results[:, 1], results[:, 0], c=results[:, 2], 
                         cmap='viridis', alpha=0.6, s=20, edgecolors='none')
