@@ -62,7 +62,7 @@ def plot_efficient_frontier(results: np.ndarray, output_path: Path):
 
 def plot_alpha_beta(market_returns: np.ndarray, asset_returns: np.ndarray,
                    alpha: float, beta: float, output_path: Path):
- """Plot alpha and beta estimation """
+    """Plot alpha and beta estimation """
     fig, ax = plt.subplots(figsize=(10, 4))
     ax.scatter(market_returns, asset_returns, alpha=0.4, s=20, 
               color="#4A90A4", edgecolors='none')

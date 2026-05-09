@@ -36,13 +36,13 @@ def main():
     output_dir = Path(args.output_dir) if args.output_dir else Path(config['output']['figures_dir'])
     output_dir.mkdir(exist_ok=True)
     
-        returns, mean_returns, cov_matrix = generate_asset_returns(
+    returns, mean_returns, cov_matrix = generate_asset_returns(
         config['simulation']['asset_returns']['n_assets'],
         config['simulation']['asset_returns']['n_periods'],
         config['simulation']['asset_returns']['seed']
     )
     
-        results, _ = efficient_frontier(
+    results, _ = efficient_frontier(
         mean_returns,
         cov_matrix,
         config['simulation']['efficient_frontier']['n_portfolios'],
@@ -50,7 +50,7 @@ def main():
     )
     plot_efficient_frontier(results, output_dir / 'efficient_frontier.png')
     
-        if config['simulation']['alpha_beta']['seed'] is not None:
+    if config['simulation']['alpha_beta']['seed'] is not None:
         np.random.seed(config['simulation']['alpha_beta']['seed'])
     market_returns = np.random.normal(
         config['simulation']['alpha_beta']['market_mean'],
