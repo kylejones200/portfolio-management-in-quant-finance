@@ -49,25 +49,27 @@ def calculate_alpha_beta(asset_returns: np.ndarray, market_returns: np.ndarray, 
     alpha = np.mean(excess_asset) - beta * np.mean(excess_market)
     return alpha, beta
 
-def plot_efficient_frontier(results: np.ndarray, output_path: Path):
+def plot_efficient_frontier(results: np.ndarray, output_path: Path, plot: bool = False):
     """Plot efficient frontier """
-    fig, ax = plt.subplots(figsize=(10, 4))
-    scatter = ax.scatter(results[:, 1], results[:, 0], c=results[:, 2], 
-                        cmap='viridis', alpha=0.6, s=20, edgecolors='none')
-    plt.colorbar(scatter, ax=ax, label='Sharpe Ratio')
-    ax.set_xlabel('Volatility (Risk)')
-    ax.set_ylabel('Expected Return')
-    plt.savefig(output_path, dpi=100, bbox_inches="tight")
-    plt.close()
+    if plot:
+        fig, ax = plt.subplots(figsize=(10, 4))
+        scatter = ax.scatter(results[:, 1], results[:, 0], c=results[:, 2], 
+                            cmap='viridis', alpha=0.6, s=20, edgecolors='none')
+        plt.colorbar(scatter, ax=ax, label='Sharpe Ratio')
+        ax.set_xlabel('Volatility (Risk)')
+        ax.set_ylabel('Expected Return')
+        plt.savefig(output_path, dpi=100, bbox_inches="tight")
+        plt.close()
 
 def plot_alpha_beta(market_returns: np.ndarray, asset_returns: np.ndarray,
                    alpha: float, beta: float, output_path: Path):
     """Plot alpha and beta estimation """
-    fig, ax = plt.subplots(figsize=(10, 4))
-    ax.scatter(market_returns, asset_returns, alpha=0.4, s=20, 
-              color="#4A90A4", edgecolors='none')
-    ax.set_xlabel("Market Returns")
-    ax.set_ylabel("Asset Returns")
-    plt.savefig(output_path, dpi=100, bbox_inches="tight")
-    plt.close()
+                   if plot:
+        fig, ax = plt.subplots(figsize=(10, 4))
+        ax.scatter(market_returns, asset_returns, alpha=0.4, s=20, 
+                  color="#4A90A4", edgecolors='none')
+        ax.set_xlabel("Market Returns")
+        ax.set_ylabel("Asset Returns")
+        plt.savefig(output_path, dpi=100, bbox_inches="tight")
+        plt.close()
 
