@@ -1,50 +1,38 @@
+---
+author: "Kyle Jones"
+date_published: "June 17, 2025"
+date_exported_from_medium: "November 10, 2025"
+canonical_link: "https://medium.com/@kyle-t-jones/portfolio-management-in-quant-finance-e7625cc3fbe9"
+---
+
 # Portfolio Management in Quant Finance A practical guide to asset weighting, Sharpe ratios, and performance
 evaluation in Python
 
-::::### Portfolio Management in Quant Finance 
+### Portfolio Management in Quant Finance 
 
 #### A practical guide to asset weighting, Sharpe ratios, and performance evaluation in Python
-Portfolio management balances risk and reward. You want to grow capital
-while protecting it. That tradeoff defines investing. This chapter
-introduces the essential tools and models used to measure return, manage
-risk, and optimize the mix of assets in a portfolio. It builds from the
-basics --- risk and return --- to advanced concepts like alpha, beta,
-and the efficient frontier.
+Portfolio management balances risk and reward. You want to grow capital while protecting it. That tradeoff defines investing. This chapter introduces the essential tools and models used to measure return, manage risk, and optimize the mix of assets in a portfolio. It builds from the basics --- risk and return --- to advanced concepts like alpha, beta, and the efficient frontier.
 
-The return on an asset is the percentage change in value over time. For
-a simple period:
+The return on an asset is the percentage change in value over time. For a simple period:
 
 
-The average return across time or assets gives a measure of growth. But
-risk matters too. The most common risk metric is volatility, defined as
-the standard deviation of returns:
+The average return across time or assets gives a measure of growth. But risk matters too. The most common risk metric is volatility, defined as the standard deviation of returns:
 
 
-Return is what you want. Risk is what you bear. Portfolio management
-tries to maximize one while controlling the other.
+Return is what you want. Risk is what you bear. Portfolio management tries to maximize one while controlling the other.
 
 ### Benefits of Diversification
-Diversification reduces risk without lowering expected return. If two
-assets move independently, then combining them smooths out the bumps.
-The portfolio variance is:
+Diversification reduces risk without lowering expected return. If two assets move independently, then combining them smooths out the bumps. The portfolio variance is:
 
 
-As correlation drops, the final term shrinks. The result is a lower
-total risk for the same average return. This principle holds for many
-assets. A diversified portfolio has better stability, less drawdown, and
-fewer surprises.
+As correlation drops, the final term shrinks. The result is a lower total risk for the same average return. This principle holds for many assets. A diversified portfolio has better stability, less drawdown, and fewer surprises.
 
 ### Modern Portfolio Theory and the Capital Asset Pricing Model
-Harry Markowitz formalized the diversification idea into Modern
-Portfolio Theory (MPT). Each asset has a return and a risk. Portfolios
-blend assets to produce a set of tradeoffs.
+Harry Markowitz formalized the diversification idea into Modern Portfolio Theory (MPT). Each asset has a return and a risk. Portfolios blend assets to produce a set of tradeoffs.
 
-The best portfolios sit on the efficient frontier: the set of portfolios
-with the highest expected return for a given risk. Investors choose
-where to be on that curve based on their risk tolerance.
+The best portfolios sit on the efficient frontier: the set of portfolios with the highest expected return for a given risk. Investors choose where to be on that curve based on their risk tolerance.
 
-The Capital Asset Pricing Model (CAPM) builds on this. It says the
-return on an asset depends on its sensitivity to the market:
+The Capital Asset Pricing Model (CAPM) builds on this. It says the return on an asset depends on its sensitivity to the market:
 
 
 Where:
@@ -54,16 +42,12 @@ Where:
 - R_m: market return
 - β_i: sensitivity of i to market movements
 
-CAPM assumes only market risk matters. Other risks can be diversified
-away.
+CAPM assumes only market risk matters. Other risks can be diversified away.
 
 ### The Efficient Frontier
-Plot portfolios in risk-return space. The lower left region is full of
-weak portfolios --- low return and high risk. The upper edge of the set
-is the efficient frontier.
+Plot portfolios in risk-return space. The lower left region is full of weak portfolios --- low return and high risk. The upper edge of the set is the efficient frontier.
 
-To compute it, use mean-variance optimization. For a given expected
-return, solve:
+To compute it, use mean-variance optimization. For a given expected return, solve:
 
 
 Where:
@@ -72,18 +56,14 @@ Where:
 - Σ: covariance matrix of returns
 - μ: vector of expected returns
 
-This quadratic program finds the minimum-risk portfolio for each level
-of return.
+This quadratic program finds the minimum-risk portfolio for each level of return.
 
 
-<figcaption>The simulation shows the optimal mix of assets for every
-risk level. Portfolios above the curve are unreachable. Below the curve
-are inefficient.</figcaption>
+<figcaption>The simulation shows the optimal mix of assets for every risk level. Portfolios above the curve are unreachable. Below the curve are inefficient.</figcaption>
 
 
 ### Optimizing Your Portfolio
-You choose how to weight assets. The goal is to match your return target
-and risk appetite. Common objectives:
+You choose how to weight assets. The goal is to match your return target and risk appetite. Common objectives:
 
 - Maximize Sharpe ratio:
 
@@ -91,15 +71,9 @@ and risk appetite. Common objectives:
 - Minimize variance: low volatility, stable returns
 - Target absolute return: hit a benchmark regardless of market
 
-Constraints shape every solution. No short selling narrows the space of
-possible portfolios. Limits on sectors or asset classes tighten it
-further. Each position must fall between a minimum and a maximum,
-forcing the allocation to obey real-world boundaries.
+Constraints shape every solution. No short selling narrows the space of possible portfolios. Limits on sectors or asset classes tighten it further. Each position must fall between a minimum and a maximum, forcing the allocation to obey real-world boundaries.
 
-To find the best mix of assets under these rules, we turn to
-optimization. Linear algebra lays the foundation. Numerical solvers do
-the work. Together, they search for weights that meet the criteria we
-set.
+To find the best mix of assets under these rules, we turn to optimization. Linear algebra lays the foundation. Numerical solvers do the work. Together, they search for weights that meet the criteria we set.
 
 ### How to Analyze Portfolio Performance
 Once you hold a portfolio, track how it performs. Key metrics:
@@ -110,31 +84,21 @@ Once you hold a portfolio, track how it performs. Key metrics:
 - Maximum Drawdown: worst peak-to-trough loss
 - Sortino Ratio: like Sharpe, but penalizes only downside risk
 
-Track performance over time. Compare to a benchmark. Understand where
-gains and losses came from.
+Track performance over time. Compare to a benchmark. Understand where gains and losses came from.
 
 ### Alphas and Betas
-Beta measures systematic risk. A beta of 1 means the asset moves with
-the market. A beta above 1 means more volatile. Below 1 means more
-stable.
+Beta measures systematic risk. A beta of 1 means the asset moves with the market. A beta above 1 means more volatile. Below 1 means more stable.
 
 Alpha measures performance beyond market movement:
 
 
-Positive alpha means the asset or manager outperformed expectations.
-Negative alpha means underperformance.
+Positive alpha means the asset or manager outperformed expectations. Negative alpha means underperformance.
 
 
-<figcaption>Regression against market returns isolates performance due
-to skill (alpha) and market sensitivity (beta).</figcaption>
+<figcaption>Regression against market returns isolates performance due to skill (alpha) and market sensitivity (beta).</figcaption>
 
 
-Beta tells you *how* the asset moves. Alpha tells you *how well* it did.
-::::Portfolio management uses math to balance risk and return. You measure
-both, combine assets to diversify, optimize weights using models like
-MPT and CAPM, and evaluate performance using alpha, beta, and Sharpe
-ratios. Good portfolio design is choosing how to handle whatever
-happens.
+Beta tells you *how* the asset moves. Alpha tells you *how well* it did. Portfolio management uses math to balance risk and return. You measure both, combine assets to diversify, optimize weights using models like MPT and CAPM, and evaluate performance using alpha, beta, and Sharpe ratios. Good portfolio design is choosing how to handle whatever happens.
 
 ```python
 import numpy as np
@@ -214,10 +178,3 @@ plt.title("Alpha and Beta Estimation")
 plt.savefig("alpha_beta.png")
 plt.show()
 ```
-::::::::::::By [Kyle Jones](https://medium.com/@kyle-t-jones) on
-[June 17, 2025](https://medium.com/p/e7625cc3fbe9).
-
-[Canonical
-link](https://medium.com/@kyle-t-jones/portfolio-management-in-quant-finance-e7625cc3fbe9)
-
-Exported from [Medium](https://medium.com) on November 10, 2025.
