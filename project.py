@@ -1,3 +1,4 @@
+import signalplot
 import numpy as np
 import matplotlib.pyplot as plt
 import logging
@@ -7,11 +8,7 @@ import logging
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
-plt.rcParams.update({
-    "font.family": "serif",
-    "axes.spines.top": False,
-    "axes.spines.right": False
-})
+signalplot.apply(font_family='serif')
 
 # Generate synthetic asset return data
 def generate_asset_returns(n_assets=3, n_periods=1000, seed=42):
