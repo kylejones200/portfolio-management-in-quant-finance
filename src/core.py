@@ -37,7 +37,7 @@ def efficient_frontier(mean_returns: np.ndarray, cov_matrix: np.ndarray, n_portf
         ret, vol = portfolio_performance(weights, mean_returns, cov_matrix)
         sharpe = ret / vol
         results[i, 0], results[i, 1], results[i, 2] = ret, vol, sharpe
-        weights_record.append(weights)
+        pd.concat([weights_record, weights])
     return results, weights_record
 
 def calculate_alpha_beta(asset_returns: np.ndarray, market_returns: np.ndarray, risk_free: float = 0.0) -> Tuple[float, float]:
