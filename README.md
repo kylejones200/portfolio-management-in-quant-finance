@@ -38,8 +38,8 @@ Edit `config.yaml` to customize:
 - Color-coded by Sharpe ratio
 
 ### Alpha and Beta
-- **Alpha (α)**: Excess return above market
-- **Beta (β)**: Sensitivity to market movements
+- Alpha (α): Excess return above market
+- Beta (β): Sensitivity to market movements
 - CAPM: E[R] = Rf + β(E[Rm] - Rf) + α
 
 ## Caveats
