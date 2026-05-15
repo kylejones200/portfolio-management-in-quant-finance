@@ -1,15 +1,19 @@
 """Core functions for portfolio management."""
 
-import numpy as np
+import logging
 from pathlib import Path
 from typing import Tuple
+
 import matplotlib.pyplot as plt
-import logging
+import numpy as np
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(message)s')
+logging.basicConfig(level=logging.INFO, format="%(message)s")
 
-def generate_asset_returns(n_assets: int = 3, n_periods: int = 1000, seed: int = 42) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+
+def generate_asset_returns(
+    n_assets: int = 3, n_periods: int = 1000, seed: int = 42
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Generate synthetic asset return data."""
     np.random.seed(seed)
     mean_returns = np.random.uniform(0.05, 0.15, n_assets)
@@ -19,13 +23,22 @@ def generate_asset_returns(n_assets: int = 3, n_periods: int = 1000, seed: int =
     returns = np.random.multivariate_normal(mean_returns, cov_matrix, size=n_periods)
     return returns, mean_returns, cov_matrix
 
-def portfolio_performance(weights: np.ndarray, mean_returns: np.ndarray, cov_matrix: np.ndarray) -> Tuple[float, float]:
+
+def portfolio_performance(
+    weights: np.ndarray, mean_returns: np.ndarray, cov_matrix: np.ndarray
+) -> Tuple[float, float]:
     """Compute portfolio return and risk."""
     ret = np.dot(weights, mean_returns)
     vol = np.sqrt(np.dot(weights.T, np.dot(cov_matrix, weights)))
     return ret, vol
 
-def efficient_frontier(mean_returns: np.ndarray, cov_matrix: np.ndarray, n_portfolios: int = 1000, seed: int = None) -> Tuple[np.ndarray, list]:
+
+def efficient_frontier(
+    mean_returns: np.ndarray,
+    cov_matrix: np.ndarray,
+    n_portfolios: int = 1000,
+    seed: int = None,
+) -> Tuple[np.ndarray, list]:
     """Generate efficient frontier."""
     if seed is not None:
         np.random.seed(seed)
@@ -40,7 +53,10 @@ def efficient_frontier(mean_returns: np.ndarray, cov_matrix: np.ndarray, n_portf
         pd.concat([weights_record, weights])
     return results, weights_record
 
-def calculate_alpha_beta(asset_returns: np.ndarray, market_returns: np.ndarray, risk_free: float = 0.0) -> Tuple[float, float]:
+
+def calculate_alpha_beta(
+    asset_returns: np.ndarray, market_returns: np.ndarray, risk_free: float = 0.0
+) -> Tuple[float, float]:
     """Calculate alpha and beta."""
     excess_asset = asset_returns - risk_free
     excess_market = market_returns - risk_free
@@ -49,27 +65,46 @@ def calculate_alpha_beta(asset_returns: np.ndarray, market_returns: np.ndarray, 
     alpha = np.mean(excess_asset) - beta * np.mean(excess_market)
     return alpha, beta
 
+
 def plot_efficient_frontier(results: np.ndarray, output_path: Path, plot: bool = False):
-    """Plot efficient frontier """
+    """Plot efficient frontier"""
     if plot:
         fig, ax = plt.subplots(figsize=(10, 4))
-        scatter = ax.scatter(results[:, 1], results[:, 0], c=results[:, 2], 
-                            cmap='viridis', alpha=0.6, s=20, edgecolors='none')
-        plt.colorbar(scatter, ax=ax, label='Sharpe Ratio')
-        ax.set_xlabel('Volatility (Risk)')
-        ax.set_ylabel('Expected Return')
+        scatter = ax.scatter(
+            results[:, 1],
+            results[:, 0],
+            c=results[:, 2],
+            cmap="viridis",
+            alpha=0.6,
+            s=20,
+            edgecolors="none",
+        )
+        plt.colorbar(scatter, ax=ax, label="Sharpe Ratio")
+        ax.set_xlabel("Volatility (Risk)")
+        ax.set_ylabel("Expected Return")
         plt.savefig(output_path, dpi=100, bbox_inches="tight")
         plt.close()
 
-def plot_alpha_beta(market_returns: np.ndarray, asset_returns: np.ndarray,
-                   alpha: float, beta: float, output_path: Path):
-    """Plot alpha and beta estimation """
+
+def plot_alpha_beta(
+    market_returns: np.ndarray,
+    asset_returns: np.ndarray,
+    alpha: float,
+    beta: float,
+    output_path: Path,
+):
+    """Plot alpha and beta estimation"""
     if plot:
         fig, ax = plt.subplots(figsize=(10, 4))
-        ax.scatter(market_returns, asset_returns, alpha=0.4, s=20, 
-        color="#4A90A4", edgecolors='none')
+        ax.scatter(
+            market_returns,
+            asset_returns,
+            alpha=0.4,
+            s=20,
+            color="#4A90A4",
+            edgecolors="none",
+        )
         ax.set_xlabel("Market Returns")
         ax.set_ylabel("Asset Returns")
         plt.savefig(output_path, dpi=100, bbox_inches="tight")
         plt.close()
-
