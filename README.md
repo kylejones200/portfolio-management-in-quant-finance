@@ -47,3 +47,11 @@ Edit `config.yaml` to customize:
 - Uses synthetic data by default. Replace with real market data for practical analysis.
 - Efficient frontier assumes normal distribution of returns.
 - Alpha and beta estimates are sensitive to time period and market conditions.
+
+## Disclaimer
+
+Educational/demo code only. Not financial, safety, or engineering advice. Use at your own risk. Verify results independently before any production or operational use.
+
+## License
+
+MIT — see [LICENSE](LICENSE).

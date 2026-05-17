@@ -68,22 +68,24 @@ def calculate_alpha_beta(
 
 def plot_efficient_frontier(results: np.ndarray, output_path: Path, plot: bool = False):
     """Plot efficient frontier"""
-    if plot:
-        fig, ax = plt.subplots(figsize=(10, 4))
-        scatter = ax.scatter(
-            results[:, 1],
-            results[:, 0],
-            c=results[:, 2],
-            cmap="viridis",
-            alpha=0.6,
-            s=20,
-            edgecolors="none",
-        )
-        plt.colorbar(scatter, ax=ax, label="Sharpe Ratio")
-        ax.set_xlabel("Volatility (Risk)")
-        ax.set_ylabel("Expected Return")
-        plt.savefig(output_path, dpi=100, bbox_inches="tight")
-        plt.close()
+    if not plot:
+        return
+
+    fig, ax = plt.subplots(figsize=(10, 4))
+    scatter = ax.scatter(
+        results[:, 1],
+        results[:, 0],
+        c=results[:, 2],
+        cmap="viridis",
+        alpha=0.6,
+        s=20,
+        edgecolors="none",
+    )
+    plt.colorbar(scatter, ax=ax, label="Sharpe Ratio")
+    ax.set_xlabel("Volatility (Risk)")
+    ax.set_ylabel("Expected Return")
+    plt.savefig(output_path, dpi=100, bbox_inches="tight")
+    plt.close()
 
 
 def plot_alpha_beta(
@@ -94,17 +96,19 @@ def plot_alpha_beta(
     output_path: Path,
 ):
     """Plot alpha and beta estimation"""
-    if plot:
-        fig, ax = plt.subplots(figsize=(10, 4))
-        ax.scatter(
-            market_returns,
-            asset_returns,
-            alpha=0.4,
-            s=20,
-            color="#4A90A4",
-            edgecolors="none",
-        )
-        ax.set_xlabel("Market Returns")
-        ax.set_ylabel("Asset Returns")
-        plt.savefig(output_path, dpi=100, bbox_inches="tight")
-        plt.close()
+    if not plot:
+        return
+
+    fig, ax = plt.subplots(figsize=(10, 4))
+    ax.scatter(
+        market_returns,
+        asset_returns,
+        alpha=0.4,
+        s=20,
+        color="#4A90A4",
+        edgecolors="none",
+    )
+    ax.set_xlabel("Market Returns")
+    ax.set_ylabel("Asset Returns")
+    plt.savefig(output_path, dpi=100, bbox_inches="tight")
+    plt.close()
