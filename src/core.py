@@ -50,7 +50,7 @@ def efficient_frontier(
         ret, vol = portfolio_performance(weights, mean_returns, cov_matrix)
         sharpe = ret / vol
         results[i, 0], results[i, 1], results[i, 2] = ret, vol, sharpe
-        pd.concat([weights_record, weights])
+        weights_record.append(weights)
     return results, weights_record
 
 
