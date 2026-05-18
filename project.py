@@ -54,27 +54,25 @@ def calculate_alpha_beta(asset_returns, market_returns, risk_free=0.0):
     return alpha, beta
 
 
-
 def main():
     # Main simulation
     returns, mean_returns, cov_matrix = generate_asset_returns()
     results, _ = efficient_frontier(mean_returns, cov_matrix)
-
     # Plot efficient frontier
     plt.figure(figsize=(10, 4))
-    plt.scatter(results[:, 1], results[:, 0], c=results[:, 2], cmap="viridis", alpha=0.6)
+    plt.scatter(
+        results[:, 1], results[:, 0], c=results[:, 2], cmap="viridis", alpha=0.6
+    )
     plt.colorbar(label="Sharpe Ratio")
     plt.xlabel("Volatility (Risk)")
     plt.ylabel("Expected Return")
     plt.title("Efficient Frontier")
     plt.savefig("efficient_frontier.png")
     plt.show()
-
     # Simulate alpha and beta for one asset
     market_returns = np.random.normal(0.1, 0.15, size=1000)
     asset_returns = 1.1 * market_returns + np.random.normal(0, 0.05, size=1000)
     alpha, beta = calculate_alpha_beta(asset_returns, market_returns)
-
     # Plot asset vs market returns
     plt.figure(figsize=(10, 4))
     plt.scatter(

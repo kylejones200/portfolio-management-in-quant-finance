@@ -22,7 +22,7 @@ logging.basicConfig(
 )
 
 
-def load_config(config_path: Path = None) -> dict:
+def load_config(config_path: Path | None = None) -> dict:
     """Load configuration from YAML file."""
     if config_path is None:
         config_path = Path(__file__).parent / "config.yaml"
@@ -38,7 +38,6 @@ def main():
         "--output-dir", type=Path, default=None, help="Output directory for plots"
     )
     args = parser.parse_args()
-
     config = load_config(args.config)
     output_dir = (
         Path(args.output_dir)
@@ -46,13 +45,11 @@ def main():
         else Path(config["output"]["figures_dir"])
     )
     output_dir.mkdir(exist_ok=True)
-
     returns, mean_returns, cov_matrix = generate_asset_returns(
         config["simulation"]["asset_returns"]["n_assets"],
         config["simulation"]["asset_returns"]["n_periods"],
         config["simulation"]["asset_returns"]["seed"],
     )
-
     results, _ = efficient_frontier(
         mean_returns,
         cov_matrix,
@@ -60,7 +57,6 @@ def main():
         config["simulation"]["efficient_frontier"]["seed"],
     )
     plot_efficient_frontier(results, output_dir / "efficient_frontier.png")
-
     if config["simulation"]["alpha_beta"]["seed"] is not None:
         np.random.seed(config["simulation"]["alpha_beta"]["seed"])
     market_returns = np.random.normal(
@@ -82,7 +78,6 @@ def main():
     plot_alpha_beta(
         market_returns, asset_returns, alpha, beta, output_dir / "alpha_beta.png"
     )
-
     logging.info(f"\nAnalysis complete. Figures saved to {output_dir}")
 
 
