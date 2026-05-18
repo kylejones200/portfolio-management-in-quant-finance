@@ -56,7 +56,7 @@ def plot_efficient_frontier(results: np.ndarray, output_path: Path, plot: bool=F
     plt.savefig(output_path, dpi=100, bbox_inches='tight')
     plt.close()
 
-def plot_alpha_beta(market_returns: np.ndarray, asset_returns: np.ndarray, alpha: float, beta: float, output_path: Path, plot: bool = False):
+def plot_alpha_beta(market_returns: np.ndarray, asset_returns: np.ndarray, alpha: float, beta: float, output_path: Path, plot: bool=False):
     """Plot alpha and beta estimation"""
     if not plot:
         return
