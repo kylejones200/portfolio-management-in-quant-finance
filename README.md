@@ -2,6 +2,14 @@
 
 This project demonstrates portfolio management concepts including efficient frontier, alpha, and beta estimation.
 
+## Business context
+
+Portfolio management balances risk and reward. You want to grow capital while protecting it. That tradeoff defines investing. This chapter introduces the essential tools and models used to measure return, manage risk, and optimize the mix of assets in a portfolio. It builds from the basics --- risk and return --- to advanced concepts like alpha, beta, and the efficient frontier.
+
+The return on an asset is the percentage change in value over time. For a simple period:
+
+The average return across time or assets gives a measure of growth. But risk matters too. The most common risk metric is volatility, defined as the standard deviation of returns:
+
 ## Article
 
 Medium article: [Portfolio Management in Quant Finance](https://medium.com/@kylejones_47003/portfolio-management-in-quant-finance-e7625cc3fbe9)
