@@ -27,7 +27,10 @@ Medium article: [Portfolio Management in Quant Finance](https://medium.com/@kyle
 │   └── plotting.py    # Tufte-style plotting utilities
 ├── tests/             # Unit tests
 ├── data/              # Data files
-└── images/            # Generated plots and figures
+├── images/            # Generated plots and figures
+├── rust/                   # Rust port (core + PyO3 + CLI bench)
+├── benchmark_rust.py       # Python vs Rust benchmark
+├── src/compute_kernel.py   # Python/numpy reference kernel
 ```
 
 ## Configuration
@@ -55,6 +58,31 @@ Edit `config.yaml` to customize:
 - Uses synthetic data by default. Replace with real market data for practical analysis.
 - Efficient frontier assumes normal distribution of returns.
 - Alpha and beta estimates are sensitive to time period and market conditions.
+
+## Rust performance port
+
+Side-by-side **Python vs Rust** implementation of the numeric hot loop — portfolio mean return and volatility. Reference PyO3 benchmark: **see `benchmark_rust.py`** on a release build (local machine; run `benchmark_rust.py` to reproduce).
+
+| Path | Role |
+|------|------|
+| `src/compute_kernel.py` | Python/numpy reference kernel |
+| `rust/core/` | Pure Rust library |
+| `rust/py/` | PyO3 bindings |
+| `rust/bench/` | Standalone CLI benchmark |
+| `benchmark_rust.py` | Python vs Rust timing + correctness check |
+
+```bash
+# Rust-only CLI benchmark
+cd rust && cargo run --release -p portfolio_management_in_quant_finance_bench
+
+# Python vs Rust (PyO3)
+pip install maturin numpy
+maturin develop --release -m rust/py/Cargo.toml
+python benchmark_rust.py
+```
+
+Python ML training, solvers, and orchestration stay in Python; Rust targets the numeric hot loops. Stochastic generators validate output shapes; deterministic kernels match at tight floating-point tolerance.
+
 
 ## Disclaimer
 

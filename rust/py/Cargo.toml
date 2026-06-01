@@ -1,0 +1,15 @@
+[package]
+name = "portfolio_management_in_quant_finance_rs"
+description = "Python bindings (PyO3) for portfolio_management_in_quant_finance_core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "portfolio_management_in_quant_finance_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+portfolio_management_in_quant_finance_core = { path = "../core" }
+pyo3 = { version = "0.28", features = ["extension-module"] }
+numpy = "0.28"

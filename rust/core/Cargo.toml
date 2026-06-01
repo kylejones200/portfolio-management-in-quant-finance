@@ -1,0 +1,9 @@
+[package]
+name = "portfolio_management_in_quant_finance_core"
+description = "Portfolio mean return and volatility"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+path = "src/lib.rs"

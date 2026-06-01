@@ -1,0 +1,13 @@
+[package]
+name = "portfolio_management_in_quant_finance_bench"
+description = "Standalone Rust benchmark (no Python)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "bench"
+path = "src/main.rs"
+
+[dependencies]
+portfolio_management_in_quant_finance_core = { path = "../core" }
